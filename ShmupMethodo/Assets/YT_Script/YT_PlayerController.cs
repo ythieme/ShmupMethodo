@@ -8,13 +8,10 @@ public class YT_PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 movement;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
