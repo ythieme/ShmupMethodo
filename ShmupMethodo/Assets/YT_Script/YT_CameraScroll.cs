@@ -26,6 +26,7 @@ public class YT_CameraScroll : MonoBehaviour
         transform.position += Vector3.right * curCameraSpeed * Time.fixedDeltaTime;
     }*/
 
+
     public void SetCameraSpeed(float newCameraSpeed)
     {
         curCameraSpeed = newCameraSpeed;

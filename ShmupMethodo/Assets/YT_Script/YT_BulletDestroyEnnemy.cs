@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YT_BulletDestroy : MonoBehaviour
+public class YT_BulletDestroyEnnemy : MonoBehaviour
 {
     private float TimerDestroy;
 
@@ -14,7 +14,7 @@ public class YT_BulletDestroy : MonoBehaviour
     {
 
 
-        if (col.gameObject.CompareTag("Wall"))
+        if (col.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
