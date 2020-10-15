@@ -34,8 +34,7 @@ public class YT_Bullets : MonoBehaviour
         StopCoroutine(nameof(ShootInvervalle));
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up* bulletForce, ForceMode2D.Impulse);
+        bullet.GetComponent<Rigidbody2D>().velocity = firePoint.right * bulletForce;
 
         Shoot = DontShoot;
 

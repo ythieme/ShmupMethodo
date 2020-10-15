@@ -10,6 +10,7 @@ public class YT_EnnemiShoot : MonoBehaviour
     //Intervalle de tir
     delegate void shootFunc();
     shootFunc Shoot;
+    public bool IsAlive;
 
     [Range(0, 5)]
     public float shootIntervale;
@@ -17,12 +18,20 @@ public class YT_EnnemiShoot : MonoBehaviour
     Vector2 pcPos;
     Vector2 pCDirection;
     public GameObject bulletPrefab;
-    public Transform firePoint;
+
+    [SerializeField]
+    public Transform[] firePoint;
+
+    public int firepointIndex = 0;
+
+
     public Transform perso;
 
     private void Start()
     {
         Shoot = DoShoot;
+        IsAlive = true;
+
     }
 
     void Update()
@@ -31,14 +40,39 @@ public class YT_EnnemiShoot : MonoBehaviour
     }
     private void DoShoot()
     {
-        StopCoroutine(nameof(ShootInvervalle));
+        if(IsAlive == true)
+        {
 
-        pCDirection = (perso.transform.position - transform.position).normalized * bulletForce;
-        GameObject fireBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        fireBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(pCDirection.x, pCDirection.y);
+            StopCoroutine(nameof(ShootInvervalle));
 
-        Shoot = dontShoot;
+            pCDirection = (perso.transform.position - transform.position).normalized * bulletForce;
 
+            for(int i = 0; i < firePoint.Length; i++)
+            {
+                GameObject fireBullet = Instantiate(bulletPrefab, firePoint[i].position, firePoint[i].rotation);
+                 fireBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(pCDirection.x, pCDirection.y);
+            }
+
+            Shoot = dontShoot;
+
+        }
+
+        else if (IsAlive == false)
+        {
+            Shoot = StopShoot;
+        }
+
+    }
+
+    void StopShoot()
+    {
+        StartCoroutine(nameof(Destrcution));
+    }
+
+    IEnumerator Destrcution()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
     }
 
     void dontShoot()
