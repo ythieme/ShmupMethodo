@@ -4,42 +4,51 @@ using UnityEngine;
 
 public class YT_EnnemiShoot : MonoBehaviour
 {
-    public Transform firePoint;
+
+    public float bulletForce;
+
+    //Intervalle de tir
+    delegate void shootFunc();
+    shootFunc Shoot;
+
+    [Range(0, 5)]
+    public float shootIntervale;
+
+    Vector2 pcPos;
+    Vector2 pCDirection;
     public GameObject bulletPrefab;
+    public Transform firePoint;
+    public Transform perso;
 
-    public float bulletForce = 20f;
-
-    private float TimerShoot;
-
-    [SerializeField]
-    float TimeToShoot = 0.5f;
+    private void Start()
+    {
+        Shoot = DoShoot;
+    }
 
     void Update()
     {
-        TimerShoot += Time.deltaTime;
+        Shoot();
+    }
+    private void DoShoot()
+    {
+        StopCoroutine(nameof(ShootInvervalle));
 
-        if (TimerShoot > TimeToShoot)
-        {
-            TimerShoot = 0f;
-            Shoot(); TimerShoot = 0;
-        }
+        pCDirection = (perso.transform.position - transform.position).normalized * bulletForce;
+        GameObject fireBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        fireBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(pCDirection.x, pCDirection.y);
+
+        Shoot = dontShoot;
 
     }
-    void OnCollisionEnter2D(Collision2D col)
+
+    void dontShoot()
     {
-
-
-        if (col.gameObject.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+        StartCoroutine(nameof(ShootInvervalle));
     }
 
-    void Shoot()
+    IEnumerator ShootInvervalle()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = bullet.transform.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-
+        yield return new WaitForSeconds(shootIntervale);
+        Shoot = DoShoot;
     }
 }
