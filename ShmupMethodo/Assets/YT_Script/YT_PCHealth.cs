@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class YT_PCHealth : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class YT_PCHealth : MonoBehaviour
     //Variable Life
     public int PlayerLife = 100;
 
+    public Slider slider;
+
     //public GameObject MenuPause;
     private void GetDamage(int damage)
     {
         PlayerLife -= damage;
         print(PlayerLife);
+        SetHealth(PlayerLife);
 
     }
 
@@ -35,5 +39,16 @@ public class YT_PCHealth : MonoBehaviour
         {
             GetDeath();
         }
+    }
+
+    public void SetMaxHealth(int PlayerLife)
+    {
+        slider.maxValue = PlayerLife;
+        slider.value = PlayerLife;
+    }
+
+    public void SetHealth(int PlayerLife)
+    {
+        slider.value = PlayerLife;
     }
 }
