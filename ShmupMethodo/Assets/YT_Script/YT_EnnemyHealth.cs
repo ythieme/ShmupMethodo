@@ -5,6 +5,8 @@ using UnityEngine;
 public class YT_EnnemyHealth : MonoBehaviour
 {
     public int EnnemyLife = 100;
+    public Animator ennemyAnim;
+    public YT_EnnemiShoot ennemyShoot;
 
     private void GetDamage(int damage)
     {
@@ -22,7 +24,16 @@ public class YT_EnnemyHealth : MonoBehaviour
 
     private void GetDeath()
     {
-        Destroy(gameObject);
+        ennemyAnim.SetBool("Explosion", true);
+        if (ennemyShoot.IsAlive == true)
+        {
+            ennemyShoot.IsAlive = false;
+        }
+
+        else if (ennemyShoot.IsAlive == false)
+        {
+            ennemyShoot.IsAlive = false;
+        }
     }
 
     private void Update()
