@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Play");
+        SceneManager.LoadScene(1);
     }
 
 }
