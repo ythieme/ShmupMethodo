@@ -11,6 +11,9 @@ public class YT_PCHealth : MonoBehaviour
 
     public Slider slider;
 
+    public Animator animExplosion;
+    public GameObject DeathMenu;
+
     //public GameObject MenuPause;
     private void GetDamage(int damage)
     {
@@ -30,7 +33,8 @@ public class YT_PCHealth : MonoBehaviour
 
     private void GetDeath()
     {
-        Destroy(gameObject);
+        animExplosion.SetBool("Explosion", true);
+        DeathMenu.SetActive(true);
     }
 
     private void Update()
