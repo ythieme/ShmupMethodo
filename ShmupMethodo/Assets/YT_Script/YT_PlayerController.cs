@@ -41,6 +41,7 @@ public class YT_PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shipAnimator.SetBool("IsMoving", true);
         mainCamera = Camera.main;
         cameraScroller = mainCamera.GetComponent<YT_CameraScroll>();
     }
@@ -214,11 +215,6 @@ public class YT_PlayerController : MonoBehaviour
         }
 
         rb.velocity = (Vector2.right * cameraScroller.GetCameraSpeed()) + (axisVector * playerSpeed);
-
-        if (rb.velocity != new Vector2(0, 0))
-        {
-            shipAnimator.SetBool("Ismoving", true);
-        }
 
     }
 
