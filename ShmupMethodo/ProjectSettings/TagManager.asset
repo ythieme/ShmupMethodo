@@ -19,8 +19,8 @@ TagManager:
   - Wall
   - Ennemies
   - Player
-  - 
-  - 
+  - EnnemyAttack
+  - PlayerAttack
   - 
   - 
   - 
