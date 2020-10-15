@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/GRL_Ressources/GRL_Scene/MainMenu.unity
     guid: 4bd4bc233c4369a4e99aa080980bc4b1
   - enabled: 1
+    path: Assets/LUB_Scenes/LUB_LD1.unity
+    guid: 215e72352dc880f4ab6cfcaf7fc95df7
+  - enabled: 0
     path: Assets/YT_Scene/YT_TestScene.unity
     guid: 4172f01af94f2b142857e898156908ee
   m_configObjects: {}
